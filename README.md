@@ -4,12 +4,16 @@
 
 # slodigt-backend
 
-**API backend central del ecosistema Slodigt.** Desarrollado en Laravel 12+, incluye:
-- Autenticación de usuarios
-- Gestión de roles (cliente, negocio, repartidor, agente)
-- Sistema de pagos y recargas
-- Migraciones y controladores estructurados
-- Soporte para conexión con apps móviles y frontend en React
+**API backend central del ecosistema Slodigt**, una plataforma que conecta negocios locales con clientes mediante tiendas en línea y restaurantes virtuales.  
+Está desarrollado en **Laravel 12+** y preparado para integrarse con apps móviles y frontend en React.  
+El sistema permite monetizar mediante **comisiones por ventas, recargas y servicios premium para negocios**.
+
+Incluye:
+- Autenticación de usuarios y roles diferenciados
+- Gestión de clientes, negocios, repartidores y agentes
+- Sistema de pagos internos con recargas, transferencias y tarjetas
+- Migraciones y controladores estructurados por dominio
+- Conexión con apps móviles (Expo) y frontend React (portal)
 
 ---
 
@@ -45,3 +49,5 @@ php artisan db:seed
 
 # 6. Inicia el servidor local
 php artisan serve
+
+📘 [Documentación técnica del backend](./overview.md)
