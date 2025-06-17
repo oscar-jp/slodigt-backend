@@ -10,28 +10,32 @@ class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_users_can_authenticate_using_the_login_screen(): void
+    public function test_users_can_authenticate_using_the_login_endpoint(): void
     {
         $user = User::factory()->create();
 
-        $response = $this->post('/login', [
-            'email' => $user->email,
+        $response = $this->postJson('/api/login', [
+            'username' => $user->username,
             'password' => 'password',
         ]);
 
-        $this->assertAuthenticated();
-        $response->assertNoContent();
+        $response->assertOk()
+            ->assertJsonStructure([
+                'user' => ['id', 'username'],
+                'token',
+            ]);
     }
 
     public function test_users_can_not_authenticate_with_invalid_password(): void
     {
         $user = User::factory()->create();
 
-        $this->post('/login', [
-            'email' => $user->email,
+        $response = $this->postJson('/api/login', [
+            'username' => $user->username,
             'password' => 'wrong-password',
         ]);
 
+        $response->assertStatus(422);
         $this->assertGuest();
     }
 
@@ -39,9 +43,13 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->post('/logout');
+        $token = $user->createToken('auth_token')->plainTextToken;
 
-        $this->assertGuest();
-        $response->assertNoContent();
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
+            ->postJson('/api/logout');
+
+        $response->assertOk()
+            ->assertJson(['message' => 'Sesión cerrada exitosamente.']);
+        $this->assertCount(0, $user->tokens);
     }
 }
