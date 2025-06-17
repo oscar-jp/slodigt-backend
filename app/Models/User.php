@@ -64,10 +64,34 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at'   => 'datetime',
-            'terms_accepted_at'   => 'datetime',
+            'email_verified_at' => 'datetime',
+            'terms_accepted_at' => 'datetime',
             'privacy_accepted_at' => 'datetime',
-            'password'            => 'hashed',
+            'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Businesses that this user owns.
+     */
+    public function ownedBusinesses()
+    {
+        return $this->hasMany(Business::class);
+    }
+
+    /**
+     * Roles the user holds within businesses.
+     */
+    public function businessRoles()
+    {
+        return $this->hasMany(BusinessUserRole::class);
+    }
+
+    /**
+     * Reviews the user has written for businesses.
+     */
+    public function businessReviews()
+    {
+        return $this->hasMany(BusinessReview::class);
     }
 }
