@@ -36,6 +36,35 @@ Slodigt está diseñado como un **marketplace central** que permite a negocios l
 
 ---
 
+## 🏗️ Módulos Implementados
+
+### Gestión de Negocios
+Manejo de altas de negocios, aprobación y roles internos. Utiliza los modelos
+`Business`, `BusinessUserRole` y `BusinessReview`.
+
+### Catálogo de Productos
+Estructura de productos, variantes y categorías por negocio (tablas ya
+disponibles). Pendiente integrar `ProductController` para CRUD completo.
+
+### Pedidos y Entregas
+Flujo de órdenes con su historial y seguimiento de repartidores mediante los
+modelos `Order`, `Delivery` y `DeliveryTrack`.
+
+### Cuentas y Transacciones
+Módulo de recargas y transferencias internas. Incluye `Account`, `Recharge`,
+`Transfer` y `Transaction`. Rutas disponibles:
+`POST /recharges`, `POST /transfers`.
+
+### Chats de Soporte
+Canales de comunicación para resolver incidencias de pedidos o recargas.
+Controlador: `SupportChatController` (`/support/chats` y `/support/chats/{chat}/messages`).
+
+### Notificaciones
+Registro de avisos al usuario por pedidos, recargas u otros eventos.
+Controlador: `NotificationController` (`GET /notifications`).
+
+---
+
 ## 🗃️ Estructura de Carpetas Relevante
 
 ```
@@ -43,13 +72,29 @@ slodigt-backend/
 ├── app/
 │   ├── Http/
 │   │   ├── Controllers/
-│   │   │   ├── Auth/ (registro, login, verificación)
+│   │   │   ├── AuthController.php
 │   │   │   ├── UserController.php
-│   │   │   └── AuthController.php
+│   │   │   ├── RechargeController.php
+│   │   │   ├── TransferController.php
+│   │   │   ├── SupportChatController.php
+│   │   │   └── NotificationController.php
 │   │   ├── Middleware/
 │   │   └── Requests/
 │   ├── Models/
-│   │   └── User.php (extendido con múltiples campos)
+│   │   ├── User.php
+│   │   ├── Account.php
+│   │   ├── Business.php
+│   │   ├── BusinessUserRole.php
+│   │   ├── BusinessReview.php
+│   │   ├── Order.php
+│   │   ├── Delivery.php
+│   │   ├── DeliveryTrack.php
+│   │   ├── Recharge.php
+│   │   ├── Transfer.php
+│   │   ├── Transaction.php
+│   │   ├── SupportChat.php
+│   │   ├── SupportChatMessage.php
+│   │   └── Notification.php
 │   └── Providers/
 ├── database/
 │   ├── migrations/
@@ -87,13 +132,12 @@ slodigt-backend/
 
 ## ✅ Pendientes Prioritarios
 
-* Terminar módulo de recargas bancarias y verificación de imagen
-* Terminar activación de tarjetas por QR
-* Crear controlador completo de transferencias internas
-* Agregar pruebas unitarias para cada rol
-* Conectar backend a apps móviles (Expo) y frontend React (portal)
-* Estructurar catálogo de productos por negocio
-* Flujo completo de pedidos desde cliente hasta entrega
+* Finalizar verificación de imagen en recargas bancarias
+* Completar activación de tarjetas vía QR
+* Implementar `BusinessController` y `ProductController`
+* Desarrollar flujo completo de pedidos y entregas
+* Añadir pruebas unitarias por rol
+* Integrar API con apps móviles Expo y portal React
 
 ---
 ## 🧪 Entorno de validación visual
