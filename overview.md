@@ -96,6 +96,9 @@ slodigt-backend/
 * Flujo completo de pedidos desde cliente hasta entrega
 
 ---
+## 🧪 Entorno de validación visual
+Para pruebas funcionales rápidas, se incluye un frontend básico con Blade para validar procesos como login, recargas, y pedidos. Este entorno no está destinado a producción.
+
 
 ## 📦 Instalación Rápida
 
