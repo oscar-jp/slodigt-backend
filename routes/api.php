@@ -38,6 +38,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('role:business')->group(function () {
         Route::post('/businesses', [BusinessController::class, 'store']);
         Route::put('/businesses/{business}', [BusinessController::class, 'update']);
+
+        Route::post('/businesses/{business}/roles', [\App\Http\Controllers\BusinessRoleController::class, 'store']);
+        Route::put('/businesses/{business}/roles/{role}', [\App\Http\Controllers\BusinessRoleController::class, 'update']);
+        Route::delete('/businesses/{business}/roles/{role}', [\App\Http\Controllers\BusinessRoleController::class, 'destroy']);
     });
 
     // Soporte y notificaciones
