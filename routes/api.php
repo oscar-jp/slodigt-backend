@@ -23,3 +23,16 @@ Route::middleware('auth:sanctum')->group(function () {
     // ✅ Ruta para actualizar perfil
     Route::put('/profile', [UserController::class, 'update']);
 });
+
+// 🔒 Rutas específicas por rol
+Route::middleware(['auth:sanctum', 'role:user'])->get('/client/orders', function () {
+    return response()->json(['message' => 'Client orders']);
+});
+
+Route::middleware(['auth:sanctum', 'role:business'])->get('/business/dashboard', function () {
+    return response()->json(['message' => 'Business dashboard']);
+});
+
+Route::middleware(['auth:sanctum', 'role:delivery'])->get('/delivery/tasks', function () {
+    return response()->json(['message' => 'Delivery tasks']);
+});
