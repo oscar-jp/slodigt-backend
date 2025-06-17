@@ -23,6 +23,8 @@ class BusinessController extends Controller
      */
     public function show(Business $business)
     {
+        $this->authorize('view', $business);
+
         return response()->json(['business' => $business]);
     }
 
@@ -31,6 +33,8 @@ class BusinessController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Business::class);
+
         $data = $request->validate([
             'name'          => 'required|string|max:100',
             'description'   => 'nullable|string',
@@ -60,6 +64,8 @@ class BusinessController extends Controller
      */
     public function update(Request $request, Business $business)
     {
+        $this->authorize('update', $business);
+
         $data = $request->validate([
             'name'          => 'sometimes|string|max:100',
             'description'   => 'nullable|string',
