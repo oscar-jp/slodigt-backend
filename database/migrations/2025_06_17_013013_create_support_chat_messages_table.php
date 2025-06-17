@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('support_messages', function (Blueprint $table) {
+        Schema::create('support_chat_messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('chat_id')->constrained('support_chats')->onDelete('cascade');
             $table->foreignId('sender_id')->constrained('users');
@@ -19,6 +19,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('support_messages');
+        Schema::dropIfExists('support_chat_messages');
     }
 };
