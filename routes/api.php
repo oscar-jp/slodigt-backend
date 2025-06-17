@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController; // 👈 asegurate de importar
+use App\Http\Controllers\RechargeController;
+use App\Http\Controllers\TransferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // ✅ Ruta para actualizar perfil
     Route::put('/profile', [UserController::class, 'update']);
+
+    // Recargas y transferencias
+    Route::post('/recharges', [RechargeController::class, 'store']);
+    Route::post('/transfers', [TransferController::class, 'store']);
 });
 
 // 🔒 Rutas específicas por rol
