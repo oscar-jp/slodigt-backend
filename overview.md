@@ -41,6 +41,9 @@ Slodigt está diseñado como un **marketplace central** que permite a negocios l
 ### Gestión de Negocios
 Manejo de altas de negocios, aprobación y roles internos. Utiliza los modelos
 `Business`, `BusinessUserRole` y `BusinessReview`.
+Rutas disponibles:
+`GET /businesses`, `GET /businesses/{id}`,
+`POST /businesses`, `PUT /businesses/{id}` (requiere rol `business`).
 
 ### Catálogo de Productos
 Estructura de productos, variantes y categorías por negocio (tablas ya

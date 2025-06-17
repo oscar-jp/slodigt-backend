@@ -8,6 +8,7 @@ use App\Http\Controllers\RechargeController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\SupportChatController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\BusinessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,14 @@ Route::middleware('auth:sanctum')->group(function () {
     // Recargas y transferencias
     Route::post('/recharges', [RechargeController::class, 'store']);
     Route::post('/transfers', [TransferController::class, 'store']);
+
+    // Gestión de negocios
+    Route::get('/businesses', [BusinessController::class, 'index']);
+    Route::get('/businesses/{business}', [BusinessController::class, 'show']);
+    Route::middleware('role:business')->group(function () {
+        Route::post('/businesses', [BusinessController::class, 'store']);
+        Route::put('/businesses/{business}', [BusinessController::class, 'update']);
+    });
 
     // Soporte y notificaciones
     Route::post('/support/chats', [SupportChatController::class, 'store']);
