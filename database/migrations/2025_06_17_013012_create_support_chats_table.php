@@ -12,6 +12,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('agent_id')->nullable()->constrained('users');
+            $table->foreignId('order_id')->nullable()->constrained('orders');
+            $table->foreignId('recharge_id')->nullable()->constrained('recharges');
             $table->enum('status', ['open', 'closed'])->default('open');
             $table->timestamps();
         });

@@ -11,6 +11,8 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('order_id')->nullable()->constrained('orders');
+            $table->foreignId('recharge_id')->nullable()->constrained('recharges');
             $table->string('type', 50);
             $table->json('data');
             $table->timestamp('read_at')->nullable();

@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController; // 👈 asegurate de importar
 use App\Http\Controllers\RechargeController;
 use App\Http\Controllers\TransferController;
+use App\Http\Controllers\SupportChatController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // Recargas y transferencias
     Route::post('/recharges', [RechargeController::class, 'store']);
     Route::post('/transfers', [TransferController::class, 'store']);
+
+    // Soporte y notificaciones
+    Route::post('/support/chats', [SupportChatController::class, 'store']);
+    Route::post('/support/chats/{chat}/messages', [SupportChatController::class, 'sendMessage']);
+    Route::get('/notifications', [NotificationController::class, 'index']);
 });
 
 // 🔒 Rutas específicas por rol
