@@ -49,5 +49,6 @@ php artisan db:seed
 
 # 6. Inicia el servidor local
 php artisan serve
+```
 
 📘 [Documentación técnica del backend](./overview.md)
