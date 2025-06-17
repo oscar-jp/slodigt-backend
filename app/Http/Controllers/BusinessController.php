@@ -11,9 +11,19 @@ class BusinessController extends Controller
     /**
      * Listar negocios disponibles.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $businesses = Business::all();
+        $query = Business::query();
+
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('city_id')) {
+            $query->where('city_id', $request->city_id);
+        }
+
+        $businesses = $query->get();
 
         return response()->json(['businesses' => $businesses]);
     }
